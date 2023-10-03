@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <BuildTasksDirectory Condition=" '$(BuildTasksDirectory)' == ''">$(MSBuildProgramFiles32)\MSBuild\Microsoft\Dynamics\AX</BuildTasksDirectory>
+    <Model>Mark1</Model>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OutputPath>bin</OutputPath>
+    <SchemaVersion>2.0</SchemaVersion>
+    <GenerateCrossReferences>True</GenerateCrossReferences>
+    <RunAppCheckerRules>False</RunAppCheckerRules>
+    <LogAppcheckerDiagsAsErrors>False</LogAppcheckerDiagsAsErrors>
+    <ProjectGuid>{3e3fcdaa-3e87-416d-ae05-03057f92c656}</ProjectGuid>
+    <Name>AyushTesting</Name>
+    <RootNamespace>AyushTesting</RootNamespace>
+    <StartupType>MenuItemDisplay</StartupType>
+    <StartupObject>Display_EmpTable</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Configuration>Debug</Configuration>
+    <DBSyncInBuild>True</DBSyncInBuild>
+    <GenerateFormAdaptors>False</GenerateFormAdaptors>
+    <Company>USMF</Company>
+    <Partition>initial</Partition>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DataEntityExpandParentChildRelations>False</DataEntityExpandParentChildRelations>
+    <DataEntityUseLabelTextAsFieldName>False</DataEntityUseLabelTextAsFieldName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Base Enums\" />
+    <Folder Include="Classes\" />
+    <Folder Include="Display Menu Items\" />
+    <Folder Include="EDT Dates\" />
+    <Folder Include="EDT Integers\" />
+    <Folder Include="EDT Strings\" />
+    <Folder Include="Forms\" />
+    <Folder Include="Menu Extensions\" />
+    <Folder Include="Menus\" />
+    <Folder Include="Reports\" />
+    <Folder Include="Simple Queries\" />
+    <Folder Include="Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AxClass\Mark_Testing_Runnable_1">
+      <SubType>Content</SubType>
+      <Name>Mark_Testing_Runnable_1</Name>
+      <Link>Classes\Mark_Testing_Runnable_1</Link>
+    </Content>
+    <Content Include="AxClass\NumberSeqModuleCustomer_packt">
+      <SubType>Content</SubType>
+      <Name>NumberSeqModuleCustomer_packt</Name>
+      <Link>Classes\NumberSeqModuleCustomer_packt</Link>
+    </Content>
+    <Content Include="AxEdt\EmplDOB">
+      <SubType>Content</SubType>
+      <Name>EmplDOB</Name>
+      <Link>EDT Dates\EmplDOB</Link>
+    </Content>
+    <Content Include="AxEdt\EmplId">
+      <SubType>Content</SubType>
+      <Name>EmplId</Name>
+      <Link>EDT Integers\EmplId</Link>
+    </Content>
+    <Content Include="AxEdt\PayElements">
+      <SubType>Content</SubType>
+      <Name>PayElements</Name>
+      <Link>EDT Strings\PayElements</Link>
+    </Content>
+    <Content Include="AxEnum\Mark_Relation_1">
+      <SubType>Content</SubType>
+      <Name>Mark_Relation_1</Name>
+      <Link>Base Enums\Mark_Relation_1</Link>
+    </Content>
+    <Content Include="AxForm\Mark_EmpFamily">
+      <SubType>Content</SubType>
+      <Name>Mark_EmpFamily</Name>
+      <Link>Forms\Mark_EmpFamily</Link>
+    </Content>
+    <Content Include="AxForm\Mark_Employee_detail">
+      <SubType>Content</SubType>
+      <Name>Mark_Employee_detail</Name>
+      <Link>Forms\Mark_Employee_detail</Link>
+    </Content>
+    <Content Include="AxForm\Mark_Emp_Salary">
+      <SubType>Content</SubType>
+      <Name>Mark_Emp_Salary</Name>
+      <Link>Forms\Mark_Emp_Salary</Link>
+    </Content>
+    <Content Include="AxMenuExtension\MainMenu.Mark1">
+      <SubType>Content</SubType>
+      <Name>MainMenu.Mark1</Name>
+      <Link>Menu Extensions\MainMenu.Mark1</Link>
+    </Content>
+    <Content Include="AxMenuItemDisplay\DisplayEmpFamily">
+      <SubType>Content</SubType>
+      <Name>DisplayEmpFamily</Name>
+      <Link>Display Menu Items\DisplayEmpFamily</Link>
+    </Content>
+    <Content Include="AxMenuItemDisplay\Display_EmpTable">
+      <SubType>Content</SubType>
+      <Name>Display_EmpTable</Name>
+      <Link>Display Menu Items\Display_EmpTable</Link>
+    </Content>
+    <Content Include="AxMenuItemDisplay\Display_Salary">
+      <SubType>Content</SubType>
+      <Name>Display_Salary</Name>
+      <Link>Display Menu Items\Display_Salary</Link>
+    </Content>
+    <Content Include="AxMenu\Mark_Paymentmangament">
+      <SubType>Content</SubType>
+      <Name>Mark_Paymentmangament</Name>
+      <Link>Menus\Mark_Paymentmangament</Link>
+    </Content>
+    <Content Include="AxQuery\Mark1_Query">
+      <SubType>Content</SubType>
+      <Name>Mark1_Query</Name>
+      <Link>Simple Queries\Mark1_Query</Link>
+    </Content>
+    <Content Include="AxReport\Mark_1_ssrs_report">
+      <SubType>Content</SubType>
+      <Name>Mark_1_ssrs_report</Name>
+      <Link>Reports\Mark_1_ssrs_report</Link>
+    </Content>
+    <Content Include="AxTable\Mark_Employee_Family">
+      <SubType>Content</SubType>
+      <Name>Mark_Employee_Family</Name>
+      <Link>Tables\Mark_Employee_Family</Link>
+    </Content>
+    <Content Include="AxTable\Mark_EmplTable">
+      <SubType>Content</SubType>
+      <Name>Mark_EmplTable</Name>
+      <Link>Tables\Mark_EmplTable</Link>
+    </Content>
+    <Content Include="AxTable\Mark_Emp_Salary">
+      <SubType>Content</SubType>
+      <Name>Mark_Emp_Salary</Name>
+      <Link>Tables\Mark_Emp_Salary</Link>
+    </Content>
+    <Content Include="AxTable\Mark_PayElement">
+      <SubType>Content</SubType>
+      <Name>Mark_PayElement</Name>
+      <Link>Tables\Mark_PayElement</Link>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.targets" />
+</Project>
