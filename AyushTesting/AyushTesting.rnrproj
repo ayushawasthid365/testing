@@ -14,8 +14,8 @@
     <ProjectGuid>{3e3fcdaa-3e87-416d-ae05-03057f92c656}</ProjectGuid>
     <Name>AyushTesting</Name>
     <RootNamespace>AyushTesting</RootNamespace>
-    <StartupType>MenuItemDisplay</StartupType>
-    <StartupObject>Display_EmpTable</StartupObject>
+    <StartupType>Class</StartupType>
+    <StartupObject>Send_welcome_mail</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <Configuration>Debug</Configuration>
@@ -34,27 +34,51 @@
   <ItemGroup>
     <Folder Include="Base Enums\" />
     <Folder Include="Classes\" />
+    <Folder Include="Data Entities\" />
     <Folder Include="Display Menu Items\" />
     <Folder Include="EDT Dates\" />
     <Folder Include="EDT Integers\" />
     <Folder Include="EDT Strings\" />
     <Folder Include="Forms\" />
+    <Folder Include="Label Files\" />
     <Folder Include="Menu Extensions\" />
     <Folder Include="Menus\" />
+    <Folder Include="Output Menu Items\" />
     <Folder Include="Reports\" />
+    <Folder Include="Security Privileges\" />
     <Folder Include="Simple Queries\" />
     <Folder Include="Tables\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AxClass\Mark_1_SSRS_Contract">
+      <SubType>Content</SubType>
+      <Name>Mark_1_SSRS_Contract</Name>
+      <Link>Classes\Mark_1_SSRS_Contract</Link>
+    </Content>
+    <Content Include="AxClass\Mark_1_SSRS_DP">
+      <SubType>Content</SubType>
+      <Name>Mark_1_SSRS_DP</Name>
+      <Link>Classes\Mark_1_SSRS_DP</Link>
+    </Content>
     <Content Include="AxClass\Mark_Testing_Runnable_1">
       <SubType>Content</SubType>
       <Name>Mark_Testing_Runnable_1</Name>
       <Link>Classes\Mark_Testing_Runnable_1</Link>
     </Content>
-    <Content Include="AxClass\NumberSeqModuleCustomer_packt">
+    <Content Include="AxClass\Send_Email">
       <SubType>Content</SubType>
-      <Name>NumberSeqModuleCustomer_packt</Name>
-      <Link>Classes\NumberSeqModuleCustomer_packt</Link>
+      <Name>Send_Email</Name>
+      <Link>Classes\Send_Email</Link>
+    </Content>
+    <Content Include="AxClass\Send_welcome_mail">
+      <SubType>Content</SubType>
+      <Name>Send_welcome_mail</Name>
+      <Link>Classes\Send_welcome_mail</Link>
+    </Content>
+    <Content Include="AxDataEntityView\Mark_1_Data_Entity_1">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Data_Entity_1</Name>
+      <Link>Data Entities\Mark_1_Data_Entity_1</Link>
     </Content>
     <Content Include="AxEdt\EmplDOB">
       <SubType>Content</SubType>
@@ -91,6 +115,16 @@
       <Name>Mark_Emp_Salary</Name>
       <Link>Forms\Mark_Emp_Salary</Link>
     </Content>
+    <Content Include="AxForm\SendEmail">
+      <SubType>Content</SubType>
+      <Name>SendEmail</Name>
+      <Link>Forms\SendEmail</Link>
+    </Content>
+    <Content Include="AxLabelFile\Mark_1_Label_en-US">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Label_en-US</Name>
+      <Link>Label Files\Mark_1_Label_en-US</Link>
+    </Content>
     <Content Include="AxMenuExtension\MainMenu.Mark1">
       <SubType>Content</SubType>
       <Name>MainMenu.Mark1</Name>
@@ -111,6 +145,16 @@
       <Name>Display_Salary</Name>
       <Link>Display Menu Items\Display_Salary</Link>
     </Content>
+    <Content Include="AxMenuItemOutput\Mark_1_DP_SSRS_Report">
+      <SubType>Content</SubType>
+      <Name>Mark_1_DP_SSRS_Report</Name>
+      <Link>Output Menu Items\Mark_1_DP_SSRS_Report</Link>
+    </Content>
+    <Content Include="AxMenuItemOutput\Mark_1_Query_based_Report">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Query_based_Report</Name>
+      <Link>Output Menu Items\Mark_1_Query_based_Report</Link>
+    </Content>
     <Content Include="AxMenu\Mark_Paymentmangament">
       <SubType>Content</SubType>
       <Name>Mark_Paymentmangament</Name>
@@ -121,10 +165,35 @@
       <Name>Mark1_Query</Name>
       <Link>Simple Queries\Mark1_Query</Link>
     </Content>
+    <Content Include="AxReport\Mark_1_DP_Based_Report">
+      <SubType>Content</SubType>
+      <Name>Mark_1_DP_Based_Report</Name>
+      <Link>Reports\Mark_1_DP_Based_Report</Link>
+    </Content>
     <Content Include="AxReport\Mark_1_ssrs_report">
       <SubType>Content</SubType>
       <Name>Mark_1_ssrs_report</Name>
       <Link>Reports\Mark_1_ssrs_report</Link>
+    </Content>
+    <Content Include="AxSecurityPrivilege\Mark_1_Data_Entity_1Maintain">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Data_Entity_1Maintain</Name>
+      <Link>Security Privileges\Mark_1_Data_Entity_1Maintain</Link>
+    </Content>
+    <Content Include="AxSecurityPrivilege\Mark_1_Data_Entity_1View">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Data_Entity_1View</Name>
+      <Link>Security Privileges\Mark_1_Data_Entity_1View</Link>
+    </Content>
+    <Content Include="AxTable\Mark_1_Data_Staging">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Data_Staging</Name>
+      <Link>Tables\Mark_1_Data_Staging</Link>
+    </Content>
+    <Content Include="AxTable\Mark_1_Temp_Table_Class_Based_Report">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Temp_Table_Class_Based_Report</Name>
+      <Link>Tables\Mark_1_Temp_Table_Class_Based_Report</Link>
     </Content>
     <Content Include="AxTable\Mark_Employee_Family">
       <SubType>Content</SubType>
@@ -145,6 +214,11 @@
       <SubType>Content</SubType>
       <Name>Mark_PayElement</Name>
       <Link>Tables\Mark_PayElement</Link>
+    </Content>
+    <Content Include="Mark_1_Label.en-US.label.txt">
+      <SubType>Content</SubType>
+      <Name>Mark_1_Label.en-US.label.txt</Name>
+      <DependentUpon>AxLabelFile\Mark_1_Label_en-US</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
