@@ -1,0 +1,107 @@
+[ExtensionOf(classStr(SysQueryRangeUtil))]
+final class Abel_FD_Range_Extension
+{
+    [QueryRangeFunctionAttribute()]
+    public static str getFinanceD()
+    {
+        Able_FinancialDim_Table abel_fd_table,abel_fd_table2,abel_fd_table3;
+        
+        str financialD = "";//'9301';
+
+        str curID = XUserInfo::find(false, curUserId()).id;
+        select * from abel_fd_table where abel_fd_table.id == curID;
+        //for system admin
+        if(abel_fd_table.ManagedBy == '')
+        {
+            while select  DimensionAccess from abel_fd_table
+            {
+                financialD = financialD + ','+ abel_fd_table.DimensionAccess;
+            }
+            financialD = subStr(financialD,2,strLen(financialD));
+            return financialD;
+        }
+        // for users
+        if(abel_fd_table.Level == '1')
+        {
+            return abel_fd_table.DimensionAccess;
+        }
+       
+
+        // for managers
+        select * from abel_fd_table where abel_fd_table.id == curID && abel_fd_table.ManagedBy != '' && abel_fd_table.Level != '1';
+        {
+            str toCheckManger = curID;
+            int hier = str2Int(abel_fd_table.Level);
+            str idMan[],idNotMan[];
+            int i = 1, j=1, ii=1;
+            while(toCheckManger)
+            {
+                while select * from abel_fd_table2 where abel_fd_table2.ManagedBy == toCheckManger
+                {
+                    Able_FinancialDim_Table abel_fin_table;
+                    select id from abel_fin_table where abel_fin_table.ManagedBy == abel_fd_table2.id;
+
+                    if(abel_fin_table.id)
+                    {
+                        idMan[i] = abel_fd_table2.id;
+                        i++;
+                    }
+                    else
+                    {
+                        idNotMan[ii] = abel_fd_table2.id;
+                        ii++;
+                    }
+                }
+                if(i>=j+1)
+                {
+                    toCheckManger = idMan[j];
+                    j++;
+                }
+                else
+                {
+                    toCheckManger = '';
+                }
+   
+            }
+            
+            str ids = '';
+            container con;
+            for (int k = 1; k <= dimOf(idMan); k++)
+            {
+                ids = ids + ','+idMan[k];
+                con += idMan[k];
+            }
+            
+            for (int k = 1; k <= dimOf(idNotMan); k++)
+            {
+                ids = ids + ','+idNotMan[k];
+                con += idNotMan[k];
+            }
+            ids = subStr(ids,2,strLen(ids));
+            
+            
+            while select * from abel_fd_table3 
+            {
+                if(conFind(con,abel_fd_table3.id))
+                {
+                    financialD = financialD + ','+ abel_fd_table3.DimensionAccess;
+                }
+            }
+            
+        }
+        financialD = subStr(financialD,2,strLen(financialD));
+      //  financialD = financialD + ','+ abel_fd_table2.DimensionAccess;
+
+        
+      return financialD; // "9301";//financialD;
+    }
+
+    //public boolean isManager(str _id)
+    //{
+    //    Able_FinancialDim_Table abel_fin_table;
+    //    select id from abel_fin_table where abel_fin_table.ManagedBy == _id;
+    //    if(abel_fin_table.id)
+    //        return true;
+    //    return false;
+    //}
+}
