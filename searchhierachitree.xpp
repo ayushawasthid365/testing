@@ -1,6 +1,10 @@
 [ExtensionOf(classStr(SysQueryRangeUtil))]
 final class Abel_FD_Range_Extension
 {
+  
+
+   
+
     [QueryRangeFunctionAttribute()]
     public static str getFinanceD()
     {
@@ -21,7 +25,7 @@ final class Abel_FD_Range_Extension
             return financialD;
         }
         // for users
-        if(abel_fd_table.Level == '1')
+        if(abel_fd_table.Level == '1' || abel_fd_table.Level == 'User')
         {
             return abel_fd_table.DimensionAccess;
         }
@@ -43,22 +47,26 @@ final class Abel_FD_Range_Extension
 
                     if(abel_fin_table.id)
                     {
+                        //checking if current id is a manager
                         idMan[i] = abel_fd_table2.id;
                         i++;
                     }
                     else
                     {
+                        //checking if current id is a user
                         idNotMan[ii] = abel_fd_table2.id;
                         ii++;
                     }
                 }
                 if(i>=j+1)
                 {
+                    // checking if Manager array is updated with more i than j
                     toCheckManger = idMan[j];
                     j++;
                 }
                 else
                 {
+                    // exit condition for while loop when Manager table is not updated in an iteration
                     toCheckManger = '';
                 }
    
@@ -66,12 +74,14 @@ final class Abel_FD_Range_Extension
             
             str ids = '';
             container con;
+            // comment this if managers are not having any AU access
+            con += curID;
             for (int k = 1; k <= dimOf(idMan); k++)
             {
                 ids = ids + ','+idMan[k];
                 con += idMan[k];
             }
-            
+            // adding non managers id in container
             for (int k = 1; k <= dimOf(idNotMan); k++)
             {
                 ids = ids + ','+idNotMan[k];
@@ -79,7 +89,7 @@ final class Abel_FD_Range_Extension
             }
             ids = subStr(ids,2,strLen(ids));
             
-            
+            // adding financial dim from id in con and temp table
             while select * from abel_fd_table3 
             {
                 if(conFind(con,abel_fd_table3.id))
@@ -90,18 +100,62 @@ final class Abel_FD_Range_Extension
             
         }
         financialD = subStr(financialD,2,strLen(financialD));
-      //  financialD = financialD + ','+ abel_fd_table2.DimensionAccess;
-
-        
+      
       return financialD; // "9301";//financialD;
     }
 
-    //public boolean isManager(str _id)
-    //{
-    //    Able_FinancialDim_Table abel_fin_table;
-    //    select id from abel_fin_table where abel_fin_table.ManagedBy == _id;
-    //    if(abel_fin_table.id)
-    //        return true;
-    //    return false;
-    //}
+    [QueryRangeFunctionAttribute()]
+    public static str getCostCenter()
+    {
+        str curID = XUserInfo::find(false, curUserId()).id;
+        OMUSERROLEORGANIZATION oMUSERROLEORGANIZATION;
+        DIMATTRIBUTEOMCOSTCENTER dIMATTRIBUTEOMCOSTCENTER;
+        OMORGANIZATIONHIERARCHYPUBLISHED oMORGANIZATIONHIERARCHYPUBLISHED,oMORGANIZATIONHIERARCHYPUBLISHED2;
+        DimensionAttributeValueSetItemView dimensionAttributeValueSetItemView;
+        container con;
+
+        select * from oMUSERROLEORGANIZATION where oMUSERROLEORGANIZATION.User == curID;
+        int64 temp = any2Int64(oMUSERROLEORGANIZATION.OMInternalOrganization);
+        int64 hierarchyType = any2Int64(oMUSERROLEORGANIZATION.OMHierarchyType);
+        
+        int flag =0;
+        while select * from oMORGANIZATIONHIERARCHYPUBLISHED 
+            where oMORGANIZATIONHIERARCHYPUBLISHED.ParentOrganization == temp
+              join dIMATTRIBUTEOMCOSTCENTER where dIMATTRIBUTEOMCOSTCENTER.Name == oMORGANIZATIONHIERARCHYPUBLISHED.ChildOrganizationName
+              join dimensionAttributeValueSetItemView where dimensionAttributeValueSetItemView.DIMENSIONATTRIBUTEVALUE ==  dIMATTRIBUTEOMCOSTCENTER.Key
+        {
+           info("testing  "+dimensionAttributeValueSetItemView.DisplayValue +" AU "+dIMATTRIBUTEOMCOSTCENTER.Value);
+            //con += dimensionAttributeValueSetItemView.DisplayValue;
+              con += dIMATTRIBUTEOMCOSTCENTER.Value;
+              flag =1;
+            
+        }
+        if(flag == 0)
+        {
+            while select * from oMORGANIZATIONHIERARCHYPUBLISHED2 where oMORGANIZATIONHIERARCHYPUBLISHED2.ParentOrganization == temp
+            {
+                str childName = oMORGANIZATIONHIERARCHYPUBLISHED2.ChildOrganizationName; 
+                while select * from oMORGANIZATIONHIERARCHYPUBLISHED
+                    where oMORGANIZATIONHIERARCHYPUBLISHED.Hierarchy == hierarchyType && oMORGANIZATIONHIERARCHYPUBLISHED.ParentOrganizationName == childName
+                    join dIMATTRIBUTEOMCOSTCENTER where dIMATTRIBUTEOMCOSTCENTER.Name == oMORGANIZATIONHIERARCHYPUBLISHED.ChildOrganizationName
+                    join dimensionAttributeValueSetItemView where dimensionAttributeValueSetItemView.DIMENSIONATTRIBUTEVALUE ==  dIMATTRIBUTEOMCOSTCENTER.Key
+                    {
+                        info("sub testing  "+dimensionAttributeValueSetItemView.DisplayValue +" AU "+dIMATTRIBUTEOMCOSTCENTER.Value);
+                        //con += dimensionAttributeValueSetItemView.DisplayValue;
+                        con += dIMATTRIBUTEOMCOSTCENTER.Value;            
+                    }
+
+            }
+
+        }
+        int i;
+        str financialD ="";
+        for (i=1; i <= conlen(con); i++)
+        {
+            financialD = financialD + "," + conpeek(con, i);
+        }
+        financialD = subStr(financialD,2,strLen(financialD));
+        return financialD;  //con2Str(con);
+    }
+
 }
